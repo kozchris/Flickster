@@ -1,0 +1,301 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		83DD1EBC15CFA2F5003C0607 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83DD1EBB15CFA2F5003C0607 /* UIKit.framework */; };
+		83DD1EBE15CFA2F5003C0607 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83DD1EBD15CFA2F5003C0607 /* Foundation.framework */; };
+		83DD1EC015CFA2F5003C0607 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83DD1EBF15CFA2F5003C0607 /* CoreGraphics.framework */; };
+		83DD1EC615CFA2F5003C0607 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 83DD1EC415CFA2F5003C0607 /* InfoPlist.strings */; };
+		83DD1EC815CFA2F5003C0607 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 83DD1EC715CFA2F5003C0607 /* main.m */; };
+		83DD1ECC15CFA2F5003C0607 /* FlicksterAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 83DD1ECB15CFA2F5003C0607 /* FlicksterAppDelegate.m */; };
+		83DD1ECF15CFA2F5003C0607 /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 83DD1ECD15CFA2F5003C0607 /* MainStoryboard_iPhone.storyboard */; };
+		83DD1ED215CFA2F5003C0607 /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 83DD1ED015CFA2F5003C0607 /* MainStoryboard_iPad.storyboard */; };
+		83DD1ED515CFA2F5003C0607 /* FlicksterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83DD1ED415CFA2F5003C0607 /* FlicksterViewController.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		83DD1EB715CFA2F5003C0607 /* Flickster.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Flickster.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		83DD1EBB15CFA2F5003C0607 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		83DD1EBD15CFA2F5003C0607 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		83DD1EBF15CFA2F5003C0607 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		83DD1EC315CFA2F5003C0607 /* Flickster-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Flickster-Info.plist"; sourceTree = "<group>"; };
+		83DD1EC515CFA2F5003C0607 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		83DD1EC715CFA2F5003C0607 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		83DD1EC915CFA2F5003C0607 /* Flickster-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Flickster-Prefix.pch"; sourceTree = "<group>"; };
+		83DD1ECA15CFA2F5003C0607 /* FlicksterAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FlicksterAppDelegate.h; sourceTree = "<group>"; };
+		83DD1ECB15CFA2F5003C0607 /* FlicksterAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FlicksterAppDelegate.m; sourceTree = "<group>"; };
+		83DD1ECE15CFA2F5003C0607 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
+		83DD1ED115CFA2F5003C0607 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
+		83DD1ED315CFA2F5003C0607 /* FlicksterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FlicksterViewController.h; sourceTree = "<group>"; };
+		83DD1ED415CFA2F5003C0607 /* FlicksterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FlicksterViewController.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		83DD1EB415CFA2F5003C0607 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				83DD1EBC15CFA2F5003C0607 /* UIKit.framework in Frameworks */,
+				83DD1EBE15CFA2F5003C0607 /* Foundation.framework in Frameworks */,
+				83DD1EC015CFA2F5003C0607 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		83DD1EAC15CFA2F5003C0607 = {
+			isa = PBXGroup;
+			children = (
+				83DD1EC115CFA2F5003C0607 /* Flickster */,
+				83DD1EBA15CFA2F5003C0607 /* Frameworks */,
+				83DD1EB815CFA2F5003C0607 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		83DD1EB815CFA2F5003C0607 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				83DD1EB715CFA2F5003C0607 /* Flickster.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		83DD1EBA15CFA2F5003C0607 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				83DD1EBB15CFA2F5003C0607 /* UIKit.framework */,
+				83DD1EBD15CFA2F5003C0607 /* Foundation.framework */,
+				83DD1EBF15CFA2F5003C0607 /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		83DD1EC115CFA2F5003C0607 /* Flickster */ = {
+			isa = PBXGroup;
+			children = (
+				83DD1ECA15CFA2F5003C0607 /* FlicksterAppDelegate.h */,
+				83DD1ECB15CFA2F5003C0607 /* FlicksterAppDelegate.m */,
+				83DD1ECD15CFA2F5003C0607 /* MainStoryboard_iPhone.storyboard */,
+				83DD1ED015CFA2F5003C0607 /* MainStoryboard_iPad.storyboard */,
+				83DD1ED315CFA2F5003C0607 /* FlicksterViewController.h */,
+				83DD1ED415CFA2F5003C0607 /* FlicksterViewController.m */,
+				83DD1EC215CFA2F5003C0607 /* Supporting Files */,
+			);
+			path = Flickster;
+			sourceTree = "<group>";
+		};
+		83DD1EC215CFA2F5003C0607 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				83DD1EC315CFA2F5003C0607 /* Flickster-Info.plist */,
+				83DD1EC415CFA2F5003C0607 /* InfoPlist.strings */,
+				83DD1EC715CFA2F5003C0607 /* main.m */,
+				83DD1EC915CFA2F5003C0607 /* Flickster-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		83DD1EB615CFA2F5003C0607 /* Flickster */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 83DD1ED815CFA2F5003C0607 /* Build configuration list for PBXNativeTarget "Flickster" */;
+			buildPhases = (
+				83DD1EB315CFA2F5003C0607 /* Sources */,
+				83DD1EB415CFA2F5003C0607 /* Frameworks */,
+				83DD1EB515CFA2F5003C0607 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Flickster;
+			productName = Flickster;
+			productReference = 83DD1EB715CFA2F5003C0607 /* Flickster.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		83DD1EAE15CFA2F5003C0607 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = Flickster;
+				LastUpgradeCheck = 0440;
+				ORGANIZATIONNAME = "Christopher Snyder";
+			};
+			buildConfigurationList = 83DD1EB115CFA2F5003C0607 /* Build configuration list for PBXProject "Flickster" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 83DD1EAC15CFA2F5003C0607;
+			productRefGroup = 83DD1EB815CFA2F5003C0607 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				83DD1EB615CFA2F5003C0607 /* Flickster */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		83DD1EB515CFA2F5003C0607 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				83DD1EC615CFA2F5003C0607 /* InfoPlist.strings in Resources */,
+				83DD1ECF15CFA2F5003C0607 /* MainStoryboard_iPhone.storyboard in Resources */,
+				83DD1ED215CFA2F5003C0607 /* MainStoryboard_iPad.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		83DD1EB315CFA2F5003C0607 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				83DD1EC815CFA2F5003C0607 /* main.m in Sources */,
+				83DD1ECC15CFA2F5003C0607 /* FlicksterAppDelegate.m in Sources */,
+				83DD1ED515CFA2F5003C0607 /* FlicksterViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		83DD1EC415CFA2F5003C0607 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				83DD1EC515CFA2F5003C0607 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		83DD1ECD15CFA2F5003C0607 /* MainStoryboard_iPhone.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				83DD1ECE15CFA2F5003C0607 /* en */,
+			);
+			name = MainStoryboard_iPhone.storyboard;
+			sourceTree = "<group>";
+		};
+		83DD1ED015CFA2F5003C0607 /* MainStoryboard_iPad.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				83DD1ED115CFA2F5003C0607 /* en */,
+			);
+			name = MainStoryboard_iPad.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		83DD1ED615CFA2F5003C0607 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		83DD1ED715CFA2F5003C0607 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		83DD1ED915CFA2F5003C0607 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Flickster/Flickster-Prefix.pch";
+				INFOPLIST_FILE = "Flickster/Flickster-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		83DD1EDA15CFA2F5003C0607 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Flickster/Flickster-Prefix.pch";
+				INFOPLIST_FILE = "Flickster/Flickster-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		83DD1EB115CFA2F5003C0607 /* Build configuration list for PBXProject "Flickster" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				83DD1ED615CFA2F5003C0607 /* Debug */,
+				83DD1ED715CFA2F5003C0607 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		83DD1ED815CFA2F5003C0607 /* Build configuration list for PBXNativeTarget "Flickster" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				83DD1ED915CFA2F5003C0607 /* Debug */,
+				83DD1EDA15CFA2F5003C0607 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 83DD1EAE15CFA2F5003C0607 /* Project object */;
+}
