@@ -10,12 +10,17 @@
 		83DD1EBC15CFA2F5003C0607 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83DD1EBB15CFA2F5003C0607 /* UIKit.framework */; };
 		83DD1EBE15CFA2F5003C0607 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83DD1EBD15CFA2F5003C0607 /* Foundation.framework */; };
 		83DD1EC015CFA2F5003C0607 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83DD1EBF15CFA2F5003C0607 /* CoreGraphics.framework */; };
-		83DD1EC615CFA2F5003C0607 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 83DD1EC415CFA2F5003C0607 /* InfoPlist.strings */; };
-		83DD1EC815CFA2F5003C0607 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 83DD1EC715CFA2F5003C0607 /* main.m */; };
-		83DD1ECC15CFA2F5003C0607 /* FlicksterAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 83DD1ECB15CFA2F5003C0607 /* FlicksterAppDelegate.m */; };
-		83DD1ECF15CFA2F5003C0607 /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 83DD1ECD15CFA2F5003C0607 /* MainStoryboard_iPhone.storyboard */; };
-		83DD1ED215CFA2F5003C0607 /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 83DD1ED015CFA2F5003C0607 /* MainStoryboard_iPad.storyboard */; };
-		83DD1ED515CFA2F5003C0607 /* FlicksterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83DD1ED415CFA2F5003C0607 /* FlicksterViewController.m */; };
+		83DD1EEE15CFA339003C0607 /* FlickrFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 83DD1EDE15CFA339003C0607 /* FlickrFetcher.m */; };
+		83DD1EF015CFA339003C0607 /* FlicksterAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 83DD1EE215CFA339003C0607 /* FlicksterAppDelegate.m */; };
+		83DD1EF115CFA339003C0607 /* FlicksterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83DD1EE415CFA339003C0607 /* FlicksterViewController.m */; };
+		83DD1EF215CFA339003C0607 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 83DD1EE515CFA339003C0607 /* main.m */; };
+		83DD1EF315CFA339003C0607 /* PhotosTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83DD1EE715CFA339003C0607 /* PhotosTableViewController.m */; };
+		83DD1EF415CFA339003C0607 /* PhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83DD1EE915CFA339003C0607 /* PhotoViewController.m */; };
+		83DD1EF515CFA339003C0607 /* PlacesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83DD1EEB15CFA339003C0607 /* PlacesTableViewController.m */; };
+		83DD1EF615CFA339003C0607 /* RecentsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83DD1EED15CFA339003C0607 /* RecentsTableViewController.m */; };
+		83DD1EFA15CFA359003C0607 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 83DD1EF715CFA359003C0607 /* InfoPlist.strings */; };
+		83DD1EFB15CFA359003C0607 /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 83DD1EF815CFA359003C0607 /* MainStoryboard_iPad.storyboard */; };
+		83DD1EFC15CFA359003C0607 /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 83DD1EF915CFA359003C0607 /* MainStoryboard_iPhone.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,16 +28,28 @@
 		83DD1EBB15CFA2F5003C0607 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		83DD1EBD15CFA2F5003C0607 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		83DD1EBF15CFA2F5003C0607 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		83DD1EC315CFA2F5003C0607 /* Flickster-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Flickster-Info.plist"; sourceTree = "<group>"; };
-		83DD1EC515CFA2F5003C0607 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		83DD1EC715CFA2F5003C0607 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		83DD1EC915CFA2F5003C0607 /* Flickster-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Flickster-Prefix.pch"; sourceTree = "<group>"; };
-		83DD1ECA15CFA2F5003C0607 /* FlicksterAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FlicksterAppDelegate.h; sourceTree = "<group>"; };
-		83DD1ECB15CFA2F5003C0607 /* FlicksterAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FlicksterAppDelegate.m; sourceTree = "<group>"; };
-		83DD1ECE15CFA2F5003C0607 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
-		83DD1ED115CFA2F5003C0607 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
-		83DD1ED315CFA2F5003C0607 /* FlicksterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FlicksterViewController.h; sourceTree = "<group>"; };
-		83DD1ED415CFA2F5003C0607 /* FlicksterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FlicksterViewController.m; sourceTree = "<group>"; };
+		83DD1EDB15CFA339003C0607 /* Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
+		83DD1EDC15CFA339003C0607 /* FlickrAPIKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlickrAPIKey.h; sourceTree = "<group>"; };
+		83DD1EDD15CFA339003C0607 /* FlickrFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlickrFetcher.h; sourceTree = "<group>"; };
+		83DD1EDE15CFA339003C0607 /* FlickrFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlickrFetcher.m; sourceTree = "<group>"; };
+		83DD1EDF15CFA339003C0607 /* Flickster-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Flickster-Info.plist"; sourceTree = "<group>"; };
+		83DD1EE015CFA339003C0607 /* Flickster-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Flickster-Prefix.pch"; sourceTree = "<group>"; };
+		83DD1EE115CFA339003C0607 /* FlicksterAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlicksterAppDelegate.h; sourceTree = "<group>"; };
+		83DD1EE215CFA339003C0607 /* FlicksterAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlicksterAppDelegate.m; sourceTree = "<group>"; };
+		83DD1EE315CFA339003C0607 /* FlicksterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlicksterViewController.h; sourceTree = "<group>"; };
+		83DD1EE415CFA339003C0607 /* FlicksterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlicksterViewController.m; sourceTree = "<group>"; };
+		83DD1EE515CFA339003C0607 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		83DD1EE615CFA339003C0607 /* PhotosTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotosTableViewController.h; sourceTree = "<group>"; };
+		83DD1EE715CFA339003C0607 /* PhotosTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotosTableViewController.m; sourceTree = "<group>"; };
+		83DD1EE815CFA339003C0607 /* PhotoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoViewController.h; sourceTree = "<group>"; };
+		83DD1EE915CFA339003C0607 /* PhotoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoViewController.m; sourceTree = "<group>"; };
+		83DD1EEA15CFA339003C0607 /* PlacesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlacesTableViewController.h; sourceTree = "<group>"; };
+		83DD1EEB15CFA339003C0607 /* PlacesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlacesTableViewController.m; sourceTree = "<group>"; };
+		83DD1EEC15CFA339003C0607 /* RecentsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecentsTableViewController.h; sourceTree = "<group>"; };
+		83DD1EED15CFA339003C0607 /* RecentsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecentsTableViewController.m; sourceTree = "<group>"; };
+		83DD1EF715CFA359003C0607 /* InfoPlist.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = InfoPlist.strings; sourceTree = "<group>"; };
+		83DD1EF815CFA359003C0607 /* MainStoryboard_iPad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
+		83DD1EF915CFA359003C0607 /* MainStoryboard_iPhone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,12 +96,22 @@
 		83DD1EC115CFA2F5003C0607 /* Flickster */ = {
 			isa = PBXGroup;
 			children = (
-				83DD1ECA15CFA2F5003C0607 /* FlicksterAppDelegate.h */,
-				83DD1ECB15CFA2F5003C0607 /* FlicksterAppDelegate.m */,
-				83DD1ECD15CFA2F5003C0607 /* MainStoryboard_iPhone.storyboard */,
-				83DD1ED015CFA2F5003C0607 /* MainStoryboard_iPad.storyboard */,
-				83DD1ED315CFA2F5003C0607 /* FlicksterViewController.h */,
-				83DD1ED415CFA2F5003C0607 /* FlicksterViewController.m */,
+				83DD1EF815CFA359003C0607 /* MainStoryboard_iPad.storyboard */,
+				83DD1EF915CFA359003C0607 /* MainStoryboard_iPhone.storyboard */,
+				83DD1EDB15CFA339003C0607 /* Common.h */,
+				83DD1EDC15CFA339003C0607 /* FlickrAPIKey.h */,
+				83DD1EDD15CFA339003C0607 /* FlickrFetcher.h */,
+				83DD1EDE15CFA339003C0607 /* FlickrFetcher.m */,
+				83DD1EE315CFA339003C0607 /* FlicksterViewController.h */,
+				83DD1EE415CFA339003C0607 /* FlicksterViewController.m */,
+				83DD1EE615CFA339003C0607 /* PhotosTableViewController.h */,
+				83DD1EE715CFA339003C0607 /* PhotosTableViewController.m */,
+				83DD1EE815CFA339003C0607 /* PhotoViewController.h */,
+				83DD1EE915CFA339003C0607 /* PhotoViewController.m */,
+				83DD1EEA15CFA339003C0607 /* PlacesTableViewController.h */,
+				83DD1EEB15CFA339003C0607 /* PlacesTableViewController.m */,
+				83DD1EEC15CFA339003C0607 /* RecentsTableViewController.h */,
+				83DD1EED15CFA339003C0607 /* RecentsTableViewController.m */,
 				83DD1EC215CFA2F5003C0607 /* Supporting Files */,
 			);
 			path = Flickster;
@@ -93,10 +120,12 @@
 		83DD1EC215CFA2F5003C0607 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				83DD1EC315CFA2F5003C0607 /* Flickster-Info.plist */,
-				83DD1EC415CFA2F5003C0607 /* InfoPlist.strings */,
-				83DD1EC715CFA2F5003C0607 /* main.m */,
-				83DD1EC915CFA2F5003C0607 /* Flickster-Prefix.pch */,
+				83DD1EE515CFA339003C0607 /* main.m */,
+				83DD1EDF15CFA339003C0607 /* Flickster-Info.plist */,
+				83DD1EE015CFA339003C0607 /* Flickster-Prefix.pch */,
+				83DD1EE115CFA339003C0607 /* FlicksterAppDelegate.h */,
+				83DD1EE215CFA339003C0607 /* FlicksterAppDelegate.m */,
+				83DD1EF715CFA359003C0607 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -153,9 +182,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				83DD1EC615CFA2F5003C0607 /* InfoPlist.strings in Resources */,
-				83DD1ECF15CFA2F5003C0607 /* MainStoryboard_iPhone.storyboard in Resources */,
-				83DD1ED215CFA2F5003C0607 /* MainStoryboard_iPad.storyboard in Resources */,
+				83DD1EFA15CFA359003C0607 /* InfoPlist.strings in Resources */,
+				83DD1EFB15CFA359003C0607 /* MainStoryboard_iPad.storyboard in Resources */,
+				83DD1EFC15CFA359003C0607 /* MainStoryboard_iPhone.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -166,40 +195,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				83DD1EC815CFA2F5003C0607 /* main.m in Sources */,
-				83DD1ECC15CFA2F5003C0607 /* FlicksterAppDelegate.m in Sources */,
-				83DD1ED515CFA2F5003C0607 /* FlicksterViewController.m in Sources */,
+				83DD1EEE15CFA339003C0607 /* FlickrFetcher.m in Sources */,
+				83DD1EF015CFA339003C0607 /* FlicksterAppDelegate.m in Sources */,
+				83DD1EF115CFA339003C0607 /* FlicksterViewController.m in Sources */,
+				83DD1EF215CFA339003C0607 /* main.m in Sources */,
+				83DD1EF315CFA339003C0607 /* PhotosTableViewController.m in Sources */,
+				83DD1EF415CFA339003C0607 /* PhotoViewController.m in Sources */,
+				83DD1EF515CFA339003C0607 /* PlacesTableViewController.m in Sources */,
+				83DD1EF615CFA339003C0607 /* RecentsTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXVariantGroup section */
-		83DD1EC415CFA2F5003C0607 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				83DD1EC515CFA2F5003C0607 /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		83DD1ECD15CFA2F5003C0607 /* MainStoryboard_iPhone.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				83DD1ECE15CFA2F5003C0607 /* en */,
-			);
-			name = MainStoryboard_iPhone.storyboard;
-			sourceTree = "<group>";
-		};
-		83DD1ED015CFA2F5003C0607 /* MainStoryboard_iPad.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				83DD1ED115CFA2F5003C0607 /* en */,
-			);
-			name = MainStoryboard_iPad.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		83DD1ED615CFA2F5003C0607 /* Debug */ = {
