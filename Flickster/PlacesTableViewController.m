@@ -12,19 +12,43 @@
 
 @interface PlacesTableViewController ()
 @property (nonatomic, strong) NSArray *places;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *refreshButton;
 @end
 
 @implementation PlacesTableViewController
 @synthesize places = _places;
+@synthesize refreshButton = _refreshButton;
 
--(NSArray*) places
+-(void) setPlaces:(NSArray *)places
 {
-    if (_places==nil)
+    if (_places!=places)
     {
-        _places = [FlickrFetcher topPlaces];
+        _places = places;
+        [self.tableView reloadData];
     }
+}
+
+-(void)refreshTableData
+{
+    UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    [spinner startAnimating];
     
-    return _places;
+    UIBarButtonItem *origButton = self.refreshButton;
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:spinner];
+    
+    dispatch_queue_t getTopPlaces = dispatch_queue_create("get top places", NULL);
+    dispatch_async(getTopPlaces, ^{
+        NSArray *topPlaces = [FlickrFetcher topPlaces];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.places = topPlaces;
+            self.navigationItem.rightBarButtonItem = origButton;            
+        });
+    });
+    dispatch_release(getTopPlaces);
+}
+
+- (IBAction)refreshClick:(UIBarButtonItem *)sender {
+    [self refreshTableData];
 }
 
 - (id)initWithStyle:(UITableViewStyle)style
@@ -40,6 +64,8 @@
 {
     [super viewDidLoad];
     
+    [self refreshTableData];
+    
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
@@ -49,6 +75,7 @@
 
 - (void)viewDidUnload
 {
+    [self setRefreshButton:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -64,7 +91,7 @@
     if([segue.identifier isEqualToString:@"Display Photo Table"] )
     {
         UITableView *tableView = (UITableView*)self.view;
-
+        
         PhotosTableViewController *photosViewController = segue.destinationViewController;
         
         photosViewController.place = [self.places objectAtIndex:tableView.indexPathForSelectedRow.row];
@@ -98,8 +125,8 @@
     
     NSDictionary *place = [self.places objectAtIndex:indexPath.row];
     /*for (NSString *key in place.allKeys) {
-        NSLog(@"key: %@ : %@", key, [place objectForKey:key]);
-    }
+     NSLog(@"key: %@ : %@", key, [place objectForKey:key]);
+     }
      */
     
     NSArray *location = [(NSString*)[place objectForKey:@"_content"] componentsSeparatedByString:@", "];
@@ -114,7 +141,7 @@
         NSRange theRange;
         theRange.location = 1;
         theRange.length = location.count-1;
-
+        
         cell.detailTextLabel.text = [[location subarrayWithRange:theRange] componentsJoinedByString:@", "];
     }
     return cell;
@@ -172,7 +199,7 @@
     
     // Pass the selected object to the new view controller.
     [self.navigationController pushViewController:photosViewController animated:YES];
-     
+    
 }
 
 @end

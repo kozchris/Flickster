@@ -13,25 +13,20 @@
 
 @interface RecentsTableViewController ()
 @property (nonatomic, strong) NSArray *recentPhotos;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *refreshButton;
 @end
 
 @implementation RecentsTableViewController
 @synthesize recentPhotos = _recentPhotos;
+@synthesize refreshButton = _refreshButton;
 
 -(void) setRecentPhotos:(NSArray *)recentPhotos
 {
-    _recentPhotos = recentPhotos;
-    [self.tableView reloadData];
-}
-
--(NSArray*) recentPhotos
-{
-    if(_recentPhotos==nil)
+    if(_recentPhotos!=recentPhotos)
     {
-        
+        _recentPhotos = recentPhotos;
+        [self.tableView reloadData];
     }
-    
-    return _recentPhotos;
 }
 
 - (id)initWithStyle:(UITableViewStyle)style
@@ -43,10 +38,34 @@
     return self;
 }
 
+-(void)refreshTableData
+{
+    UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    [spinner startAnimating];
+    
+    UIBarButtonItem *origButton = self.refreshButton;
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:spinner];
+    
+    dispatch_queue_t getRecentPhotos = dispatch_queue_create("get recent photos", NULL);
+    dispatch_async(getRecentPhotos, ^{
+        //init table data
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.recentPhotos = [defaults valueForKey:KEY_RECENT_PHOTOS];
+            self.navigationItem.rightBarButtonItem = origButton;
+        });
+    });
+    dispatch_release(getRecentPhotos);
+}
+
+- (IBAction)refreshClick:(UIBarButtonItem *)sender {
+    [self refreshTableData];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-     
+    
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
@@ -58,13 +77,12 @@
 {
     [super viewWillAppear:animated];
     
-    //init table data
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    self.recentPhotos = [defaults valueForKey:KEY_RECENT_PHOTOS];
+    [self refreshTableData];
 }
 
 - (void)viewDidUnload
 {
+    [self setRefreshButton:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;

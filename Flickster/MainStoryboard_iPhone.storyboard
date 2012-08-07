@@ -68,7 +68,16 @@
                             <outlet property="delegate" destination="p7L-A1-e9B" id="vdO-TU-HaA"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Places" id="kEb-LF-dKz"/>
+                    <navigationItem key="navigationItem" title="Places" id="kEb-LF-dKz">
+                        <barButtonItem key="rightBarButtonItem" title="Refresh" id="qAx-sc-mlz">
+                            <connections>
+                                <action selector="refreshClick:" destination="p7L-A1-e9B" id="SOd-dC-FBI"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="refreshButton" destination="qAx-sc-mlz" id="3zO-D7-ZqK"/>
+                    </connections>
                 </tableViewController>
             </objects>
             <point key="canvasLocation" x="586" y="-34"/>
@@ -117,7 +126,16 @@
                             <outlet property="delegate" destination="636-hN-gxG" id="Hja-gY-llt"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Photos" id="owd-rL-Wfy"/>
+                    <navigationItem key="navigationItem" title="Photos" id="owd-rL-Wfy">
+                        <barButtonItem key="rightBarButtonItem" title="Refresh" id="xwC-BC-LnI">
+                            <connections>
+                                <action selector="refreshClick:" destination="636-hN-gxG" id="qnX-ow-Mfq"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="refreshButton" destination="xwC-BC-LnI" id="VPW-mN-AW5"/>
+                    </connections>
                 </tableViewController>
             </objects>
             <point key="canvasLocation" x="1009" y="-42"/>
@@ -200,7 +218,16 @@
                             <outlet property="delegate" destination="GOv-hA-FRA" id="Dcp-eA-IM7"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Recently Viewed" id="zQt-9m-4F8"/>
+                    <navigationItem key="navigationItem" title="Recently Viewed" id="zQt-9m-4F8">
+                        <barButtonItem key="rightBarButtonItem" title="Refresh" id="eny-oJ-rk9">
+                            <connections>
+                                <action selector="refreshClick:" destination="GOv-hA-FRA" id="Lls-wb-9aN"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="refreshButton" destination="eny-oJ-rk9" id="gcS-np-ZfL"/>
+                    </connections>
                 </tableViewController>
             </objects>
             <point key="canvasLocation" x="611" y="591"/>
@@ -249,17 +276,31 @@
             <source key="sourceIdentifier" type="project" relativePath="./Classes/PhotoViewController.h"/>
             <relationships>
                 <relationship kind="outlet" name="imageView" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="photoTitle" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
+                <relationship kind="outlet" name="toolbar" candidateClass="UIToolbar"/>
             </relationships>
         </class>
         <class className="PhotosTableViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/PhotosTableViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="refreshClick:" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="refreshButton" candidateClass="UIBarButtonItem"/>
+            </relationships>
         </class>
         <class className="PlacesTableViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/PlacesTableViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="refreshClick:" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="refreshButton" candidateClass="UIBarButtonItem"/>
+            </relationships>
         </class>
         <class className="RecentsTableViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/RecentsTableViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="refreshClick:" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="refreshButton" candidateClass="UIBarButtonItem"/>
+            </relationships>
         </class>
     </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

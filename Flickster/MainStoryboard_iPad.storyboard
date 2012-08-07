@@ -63,8 +63,17 @@
                             <outlet property="delegate" destination="2W4-dL-As3" id="9gy-aT-LM2"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Places" id="Uew-7m-p4h"/>
+                    <navigationItem key="navigationItem" title="Places" id="Uew-7m-p4h">
+                        <barButtonItem key="rightBarButtonItem" title="Refresh" id="xZG-qs-dGm">
+                            <connections>
+                                <action selector="refreshClick:" destination="2W4-dL-As3" id="bLt-6f-dSd"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackTranslucent"/>
+                    <connections>
+                        <outlet property="refreshButton" destination="xZG-qs-dGm" id="r7h-FU-zZN"/>
+                    </connections>
                 </tableViewController>
             </objects>
             <point key="canvasLocation" x="1168" y="-1020"/>
@@ -110,8 +119,17 @@
                             <outlet property="delegate" destination="9tQ-KU-D50" id="evH-MM-wSh"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Photos" id="Acf-0d-Kyk"/>
+                    <navigationItem key="navigationItem" title="Photos" id="Acf-0d-Kyk">
+                        <barButtonItem key="rightBarButtonItem" title="Refresh" id="x2r-Th-7p7">
+                            <connections>
+                                <action selector="refreshClick:" destination="9tQ-KU-D50" id="lXw-1v-PkO"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackTranslucent"/>
+                    <connections>
+                        <outlet property="refreshButton" destination="x2r-Th-7p7" id="V0w-Hn-QoV"/>
+                    </connections>
                 </tableViewController>
             </objects>
             <point key="canvasLocation" x="1759" y="-1020"/>
@@ -157,8 +175,17 @@
                             <outlet property="delegate" destination="zJd-Sz-uA5" id="b5O-Tq-oNL"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Recently Viewed" id="Lhk-tU-Me1"/>
+                    <navigationItem key="navigationItem" title="Recently Viewed" id="Lhk-tU-Me1">
+                        <barButtonItem key="rightBarButtonItem" title="Refresh" id="cX0-76-PAi">
+                            <connections>
+                                <action selector="refreshClick:" destination="zJd-Sz-uA5" id="bpq-p0-LSi"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackTranslucent"/>
+                    <connections>
+                        <outlet property="refreshButton" destination="cX0-76-PAi" id="7d3-4K-iW3"/>
+                    </connections>
                 </tableViewController>
             </objects>
             <point key="canvasLocation" x="1135" y="187"/>

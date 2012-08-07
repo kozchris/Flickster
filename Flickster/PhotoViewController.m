@@ -46,18 +46,35 @@
         return;
     }
     
-    //necessary to reset zoom scale so that next time zoom is set new value will get used.
-    self.scrollView.zoomScale = 1.0;
+    UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    [spinner startAnimating];
+    NSMutableArray *toolbarItems = [self.toolbar.items mutableCopy];
+    [toolbarItems addObject:[[UIBarButtonItem alloc] initWithCustomView:spinner]];
+    self.toolbar.items = toolbarItems;
     
-    NSURL *url = [FlickrFetcher urlForPhoto:self.photo format:FlickrPhotoFormatLarge ];
-	
-    NSData *imageData = [NSData dataWithContentsOfURL:url];
-    
-    UIImage *image = [UIImage imageWithData:imageData];
-    
-    self.imageView.image = image;
-    
-    [self setupScrollView];
+    dispatch_queue_t downloadQueue = dispatch_queue_create("image downloader", NULL);
+    dispatch_async(downloadQueue, ^{
+        
+        NSURL *url = [FlickrFetcher urlForPhoto:self.photo format:FlickrPhotoFormatLarge ];
+        
+        NSData *imageData = [NSData dataWithContentsOfURL:url];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            UIImage *image = [UIImage imageWithData:imageData];
+            
+            //necessary to reset zoom scale so that next time zoom is set new value will get used.
+            self.scrollView.zoomScale = 1.0;
+            
+            self.imageView.image = image;
+            
+            [self setupScrollView];
+            
+            NSMutableArray *toolbarItems = [self.toolbar.items mutableCopy];
+            [toolbarItems removeLastObject];
+            self.toolbar.items = toolbarItems;
+        });
+    });
+    dispatch_release(downloadQueue);
 }
 
 
@@ -68,10 +85,10 @@
         _photo = photo;
         
         //set title
-        NSString *title = [photo objectForKey:@"title"];
+        NSString *title = [photo objectForKey:FLICKR_PHOTO_TITLE];
         title = [title stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
         
-        NSString *description = [[photo objectForKey:@"description"] objectForKey:@"_content"];
+        NSString *description = [photo objectForKey:FLICKR_PHOTO_DESCRIPTION];
         
         if (title.length == 0)
         {
@@ -88,41 +105,45 @@
         self.photoTitle.title = title;
         
         //add image to recently viewed list
-        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        NSMutableArray *recentlyViewed;
-        NSArray *keyValue = [defaults valueForKey:KEY_RECENT_PHOTOS];
-        if(keyValue==nil)
-        {
-            recentlyViewed = [[NSMutableArray alloc] init];
-        }
-        else
-        {
-            recentlyViewed = [keyValue mutableCopy];
-        }
-        
-        //remove any copies of them image already in list
-        for (int i=recentlyViewed.count-1; i>=0; i--) {
-            /*
-             NSDictionary *test = [recentlyViewed objectAtIndex:i];
-             for (NSString *key in test.allKeys) {
-             NSLog(@"key: %@ : %@", key, [test objectForKey:key]);
-             }*/
-            
-            if ([[recentlyViewed objectAtIndex:i] objectForKey:@"id"] == [photo objectForKey:@"id"])
+        dispatch_queue_t addRecentToDefaults = dispatch_queue_create("add recent to defaults", NULL);
+        dispatch_async(addRecentToDefaults, ^{
+            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+            NSMutableArray *recentlyViewed;
+            NSArray *keyValue = [defaults valueForKey:KEY_RECENT_PHOTOS];
+            if(keyValue==nil)
             {
-                [recentlyViewed removeObjectAtIndex:i];
+                recentlyViewed = [[NSMutableArray alloc] init];
             }
-        }
-        
-        [recentlyViewed insertObject:photo atIndex:0];
-        
-        if(recentlyViewed.count>MAX_RECENT_PHOTOS)
-        {
-            [recentlyViewed removeLastObject];
-        }
-        
-        [defaults setValue:recentlyViewed forKey:KEY_RECENT_PHOTOS];
-        [defaults synchronize];
+            else
+            {
+                recentlyViewed = [keyValue mutableCopy];
+            }
+            
+            //remove any copies of them image already in list
+            for (int i=recentlyViewed.count-1; i>=0; i--) {
+                /*
+                 NSDictionary *test = [recentlyViewed objectAtIndex:i];
+                 for (NSString *key in test.allKeys) {
+                 NSLog(@"key: %@ : %@", key, [test objectForKey:key]);
+                 }*/
+                
+                if ([[recentlyViewed objectAtIndex:i] objectForKey:FLICKR_PHOTO_ID] == [photo objectForKey:FLICKR_PHOTO_ID])
+                {
+                    [recentlyViewed removeObjectAtIndex:i];
+                }
+            }
+            
+            [recentlyViewed insertObject:photo atIndex:0];
+            
+            if(recentlyViewed.count>MAX_RECENT_PHOTOS)
+            {
+                [recentlyViewed removeLastObject];
+            }
+            
+            [defaults setValue:recentlyViewed forKey:KEY_RECENT_PHOTOS];
+            [defaults synchronize];
+        });
+        dispatch_release(addRecentToDefaults);
         
         //draw image
         [self loadImage];
@@ -146,8 +167,8 @@
 }
 
 - (void)viewDidLoad
-{   
-    [super viewDidLoad];    
+{
+    [super viewDidLoad];
 }
 
 -(UIView*) viewForZoomingInScrollView:(UIScrollView *)scrollView
