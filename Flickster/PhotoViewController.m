@@ -25,6 +25,19 @@
 @synthesize toolbar = _toolbar;
 @synthesize photo = _photo;
 
+-(void) setupScrollView
+{
+    CGFloat hScale, wScale, scale;
+    
+    hScale = self.scrollView.bounds.size.height/self.imageView.image.size.height;
+    wScale = self.scrollView.bounds.size.width/self.imageView.image.size.width;
+    
+    scale  = (hScale > wScale)? hScale : wScale;
+    self.scrollView.contentSize = self.imageView.image.size;
+    self.imageView.frame = CGRectMake(0,0, self.imageView.image.size.width, self.imageView.image.size.height);
+    
+    self.scrollView.zoomScale = scale;
+}
 
 -(void) loadImage
 {
@@ -44,18 +57,8 @@
     
     self.imageView.image = image;
     
-    CGFloat hScale, wScale, scale;
-    
-    hScale = self.scrollView.bounds.size.height/image.size.height;
-    wScale = self.scrollView.bounds.size.width/image.size.width;
-    
-    scale  = (hScale > wScale)? hScale : wScale;
-    self.scrollView.contentSize = image.size;
-    self.imageView.frame = CGRectMake(0,0, image.size.width, image.size.height);
-    
-    self.scrollView.zoomScale = scale;
+    [self setupScrollView];
 }
-
 
 
 -(void) setPhoto:(NSDictionary *)photo
@@ -143,8 +146,8 @@
 }
 
 - (void)viewDidLoad
-{
-    [super viewDidLoad];
+{   
+    [super viewDidLoad];    
 }
 
 -(UIView*) viewForZoomingInScrollView:(UIScrollView *)scrollView
@@ -156,38 +159,7 @@
 {
     [super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
     
-    /*NSLog(@"tb: %f %f h: %f", self.toolbar.frame.origin.x, self.toolbar.frame.origin.y,
-          self.toolbar.bounds.size.height);
-    
-    NSLog(@"sv: %f %f h: %f", self.scrollView.frame.origin.x, self.scrollView.frame.origin.y,
-          self.scrollView.bounds.size.height);
-
-    NSLog(@"v: %f %f h: %f", self.view.frame.origin.x, self.view.frame.origin.y,
-          self.view.bounds.size.height);
-    */
-    
-    if (UIInterfaceOrientationIsPortrait(self.interfaceOrientation))
-    {
-        self.toolbar.frame = CGRectMake(self.toolbar.frame.origin.x,
-                                         0, self.toolbar.frame.size.width, self.toolbar.frame.size.height);
-        
-        self.scrollView.frame = CGRectMake(self.scrollView.frame.origin.x,
-                                            self.toolbar.frame.size.height,
-                                            self.scrollView.frame.size.width,
-                                            self.scrollView.frame.size.height - self.toolbar.frame.size.height);
-    }
-    else
-    {
-        self.toolbar.frame = CGRectMake(self.toolbar.frame.origin.x,
-                                         self.toolbar.frame.origin.y - self.toolbar.frame.size.height, self.toolbar.frame.size.width, self.toolbar.frame.size.height);
-        
-        self.scrollView.frame = CGRectMake(self.scrollView.frame.origin.x,
-                                            0,
-                                            self.scrollView.frame.size.width,
-                                            self.scrollView.frame.size.height + self.toolbar.frame.size.height);
-    }
-    
-    [self loadImage];
+    [self setupScrollView];
 }
 
 -(void) viewWillAppear:(BOOL)animated
