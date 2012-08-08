@@ -39,9 +39,11 @@
     self.scrollView.zoomScale = scale;
 }
 
+#define MAX_IMAGE_CACHE_SIZE 10000000
+
 -(void) loadImage
 {
-    if (self.imageView == nil)
+    if (self.imageView == nil || self.photo == nil)
     {
         return;
     }
@@ -55,9 +57,93 @@
     dispatch_queue_t downloadQueue = dispatch_queue_create("image downloader", NULL);
     dispatch_async(downloadQueue, ^{
         
-        NSURL *url = [FlickrFetcher urlForPhoto:self.photo format:FlickrPhotoFormatLarge ];
+        //check for image in cache
+        NSFileManager *fileManager = [[NSFileManager alloc] init];
+        NSURL *cacheURL = [[fileManager URLsForDirectory:NSCachesDirectory inDomains:NSUserDomainMask ] lastObject];
         
-        NSData *imageData = [NSData dataWithContentsOfURL:url];
+        NSError *error;
+        
+        NSString *imageFileName = [@"img_" stringByAppendingString:[self.photo objectForKey:FLICKR_PHOTO_ID]];
+        NSURL *imageURL = [[NSURL alloc] initWithString:imageFileName relativeToURL:cacheURL];
+        
+        //try to read and check error as described as best practice in documentation instead of using file exists check
+        NSData *imageData = [[NSData alloc] initWithContentsOfURL:imageURL options:NSDataReadingMappedIfSafe error:&error];
+        if (error != nil )
+        {
+            //not found
+            if ([error code] == NSFileReadNoSuchFileError)
+            {
+                //if not in cache, fetch image
+                NSURL *url = [FlickrFetcher urlForPhoto:self.photo format:FlickrPhotoFormatLarge ];
+                imageData = [NSData dataWithContentsOfURL:url];
+                
+                //reduce cache size if greater than 10MB
+                //by removing oldest files
+                //get array of files delete oldest file until cache is less than 10MB
+                NSArray *propertyKeys = [[NSArray alloc] initWithObjects:NSURLCreationDateKey, NSURLNameKey, NSURLContentAccessDateKey, NSURLFileSizeKey, nil];
+                NSArray *cacheFiles = [fileManager contentsOfDirectoryAtURL:cacheURL includingPropertiesForKeys:propertyKeys options:NSDirectoryEnumerationSkipsHiddenFiles error:&error];
+                
+                __block int currentCacheSize = 0;
+                [cacheFiles enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop){
+                    NSNumber *fileSize;
+                    NSError *error;
+                    [(NSURL*)obj getResourceValue:&fileSize forKey:NSURLFileSizeKey error:&error];
+                    if (error!=nil)
+                    {
+                        *stop = YES;
+                    }
+                    currentCacheSize += [fileSize intValue];
+                }];
+                
+                if ( currentCacheSize + [imageData length] > MAX_IMAGE_CACHE_SIZE )
+                {
+                    //order the cache files
+                    NSArray *cacheFilesByAccessDateDesc = [cacheFiles sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2)
+                                                           {
+                                                               NSURL *file1 = obj1;
+                                                               NSURL *file2 = obj2;
+                                                               
+                                                               NSDate *file1ModificationDate, *file2ModificationDate;
+                                                               NSError *error;
+                                                               [file1 getResourceValue:&file1ModificationDate forKey:NSURLContentAccessDateKey error:&error];
+                                                               [file2 getResourceValue:&file2ModificationDate forKey:NSURLContentAccessDateKey error:&error];
+                                                               
+                                                               NSComparisonResult result = NSOrderedSame;
+                                                               if (file1ModificationDate > file2ModificationDate)
+                                                               {
+                                                                   result = NSOrderedDescending;
+                                                               }
+                                                               else if (file1ModificationDate < file2ModificationDate)
+                                                               {
+                                                                   result = NSOrderedAscending;
+                                                               }
+                                                               
+                                                               return result;
+                                                           }];
+                    
+                    int spaceNeeded = currentCacheSize + [imageData length] - MAX_IMAGE_CACHE_SIZE;
+                    for(NSURL *cacheFile in cacheFilesByAccessDateDesc)
+                    {
+                        NSNumber *fileSize;
+                        [cacheFile getResourceValue:&fileSize forKey:NSURLFileSizeKey error:&error];
+                        
+                        [fileManager removeItemAtURL:cacheFile error:&error];
+                        
+                        spaceNeeded -= [fileSize intValue];
+                        if (spaceNeeded < 0)
+                        {
+                            break;
+                        }
+                    }
+                }
+                
+                // and add to cache if size is < 10MB
+                if ([imageData length] < MAX_IMAGE_CACHE_SIZE )
+                {
+                    [imageData writeToURL:imageURL atomically:YES];
+                }
+            }
+        }
         
         dispatch_async(dispatch_get_main_queue(), ^{
             UIImage *image = [UIImage imageWithData:imageData];
@@ -73,6 +159,7 @@
             [toolbarItems removeLastObject];
             self.toolbar.items = toolbarItems;
         });
+        
     });
     dispatch_release(downloadQueue);
 }
