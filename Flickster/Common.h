@@ -12,4 +12,8 @@
 #define KEY_RECENT_PHOTOS @"Flickster.recentphotos"
 #define MAX_RECENT_PHOTOS 100
 
+#define KEY_LIST_MAP_SELECTION @"Flickster.listmapselection"
+
+#define MAX_PLACE_PHOTO_RESULTS 50
+
 #endif
