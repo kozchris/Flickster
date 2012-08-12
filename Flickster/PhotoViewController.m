@@ -175,7 +175,7 @@
         NSString *title = [photo objectForKey:FLICKR_PHOTO_TITLE];
         title = [title stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
         
-        NSString *description = [photo objectForKey:FLICKR_PHOTO_DESCRIPTION];
+        NSString *description = [photo valueForKeyPath:FLICKR_PHOTO_DESCRIPTION];
         
         if (title.length == 0)
         {

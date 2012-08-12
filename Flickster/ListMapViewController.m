@@ -74,6 +74,7 @@ typedef enum enumViewType { kList, kMap } enumViewType;
     
     UIBarButtonItem *origButton = self.refreshButton;
     NSMutableArray *toolbarItems = [self.toolbar.items mutableCopy ];
+    
     [toolbarItems removeLastObject];
     UIBarButtonItem *spinnerBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:spinner];
     [toolbarItems addObject:spinnerBarButtonItem];
