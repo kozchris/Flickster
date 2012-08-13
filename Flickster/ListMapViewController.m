@@ -21,6 +21,7 @@
 
 @property (weak, nonatomic) IBOutlet UIView *contentView;
 
+@property (weak, nonatomic) IBOutlet UISegmentedControl *mapViewTypeSelector;
 typedef enum enumViewType { kList, kMap } enumViewType;
 @end
 
@@ -31,6 +32,7 @@ typedef enum enumViewType { kList, kMap } enumViewType;
 @synthesize refreshButton = _refreshButton;
 @synthesize toolbar = _toolbar;
 @synthesize contentView = _contentView;
+@synthesize mapViewTypeSelector = _mapViewTypeSelector;
 @synthesize annotations = _annotations;
 
 -(void) adjustMapViewToShowAnnotations
@@ -109,6 +111,7 @@ typedef enum enumViewType { kList, kMap } enumViewType;
         self.mapView.frame = self.contentView.bounds;
         [self.contentView bringSubviewToFront:self.mapView];
         [self adjustMapViewToShowAnnotations];
+        [self.contentView bringSubviewToFront:self.mapViewTypeSelector];
     }
 }
 
@@ -119,6 +122,24 @@ typedef enum enumViewType { kList, kMap } enumViewType;
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setValue:[[NSNumber alloc] initWithInt:self.listMapControl.selectedSegmentIndex] forKey:KEY_LIST_MAP_SELECTION];
     [defaults synchronize];
+}
+
+
+- (IBAction)mapViewTypeClick:(UISegmentedControl *)sender {
+    switch (sender.selectedSegmentIndex)
+    {
+        case 0:
+            self.mapView.mapType = MKMapTypeStandard;
+            break;
+        case 1:
+            self.mapView.mapType = MKMapTypeSatellite;
+            break;
+        case 2:
+            self.mapView.mapType = MKMapTypeHybrid;
+            break;
+        default:
+            self.mapView.mapType = MKMapTypeStandard;
+    }
 }
 
 - (IBAction)refreshClick:(UIBarButtonItem *)sender {
@@ -429,6 +450,7 @@ typedef enum enumViewType { kList, kMap } enumViewType;
     [self setRefreshButton:nil];
     [self setToolbar:nil];
     [self setContentView:nil];
+    [self setMapViewTypeSelector:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }

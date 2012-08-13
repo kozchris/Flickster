@@ -97,12 +97,24 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" id="csK-0l-pb8">
-                                        <rect key="frame" x="20" y="182" width="280" height="100"/>
+                                        <rect key="frame" x="20" y="170" width="280" height="153"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <connections>
                                             <outlet property="delegate" destination="v6G-Ir-aX0" id="KfL-f3-MzG"/>
                                         </connections>
                                     </mapView>
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="bottom" segmentControlStyle="plain" selectedSegmentIndex="0" id="4k4-sF-Jzr">
+                                        <rect key="frame" x="33" y="260" width="254" height="44"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                        <segments>
+                                            <segment title="Normal"/>
+                                            <segment title="Satellite"/>
+                                            <segment title="Hybrid"/>
+                                        </segments>
+                                        <connections>
+                                            <action selector="mapViewTypeClick:" destination="v6G-Ir-aX0" eventType="valueChanged" id="ka5-F4-7CN"/>
+                                        </connections>
+                                    </segmentedControl>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="VLv-tv-tDk">
                                         <rect key="frame" x="20" y="62" width="280" height="100"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -154,6 +166,7 @@
                         <outlet property="contentView" destination="cYi-mX-RnQ" id="UWW-wm-lwD"/>
                         <outlet property="listMapControl" destination="pMF-mW-Vd5" id="pUC-gu-0QB"/>
                         <outlet property="mapView" destination="csK-0l-pb8" id="xD9-rU-on6"/>
+                        <outlet property="mapViewTypeSelector" destination="4k4-sF-Jzr" id="r5Y-kJ-3rg"/>
                         <outlet property="refreshButton" destination="pJf-Zr-mSg" id="ePn-G3-YMj"/>
                         <outlet property="tableView" destination="VLv-tv-tDk" id="RrG-v1-yeW"/>
                         <outlet property="toolbar" destination="IsB-3F-LOI" id="vXW-Dt-YJf"/>
@@ -227,6 +240,18 @@
                                             <outlet property="delegate" destination="sVA-eX-lEi" id="aWf-nP-e30"/>
                                         </connections>
                                     </mapView>
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="bottom" segmentControlStyle="plain" selectedSegmentIndex="0" id="S11-bX-3l4">
+                                        <rect key="frame" x="33" y="260" width="254" height="44"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                        <segments>
+                                            <segment title="Normal"/>
+                                            <segment title="Satellite"/>
+                                            <segment title="Hybrid"/>
+                                        </segments>
+                                        <connections>
+                                            <action selector="mapViewTypeClick:" destination="sVA-eX-lEi" eventType="valueChanged" id="Zly-4L-JJg"/>
+                                        </connections>
+                                    </segmentedControl>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="xQH-0r-zvN">
                                         <rect key="frame" x="20" y="20" width="280" height="102"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -278,6 +303,7 @@
                         <outlet property="contentView" destination="inU-W2-cNT" id="j5W-P4-aDJ"/>
                         <outlet property="listMapControl" destination="8v2-Da-ulX" id="193-m5-JIn"/>
                         <outlet property="mapView" destination="Izf-2n-2rS" id="HTh-yM-IyH"/>
+                        <outlet property="mapViewTypeSelector" destination="S11-bX-3l4" id="SWv-3B-7fG"/>
                         <outlet property="refreshButton" destination="T1O-86-WH5" id="st5-cP-NcG"/>
                         <outlet property="tableView" destination="xQH-0r-zvN" id="57p-Pi-zUn"/>
                         <outlet property="toolbar" destination="tSP-nX-VJH" id="drU-in-dsU"/>
@@ -331,6 +357,18 @@
                                             <outlet property="delegate" destination="Ns4-0E-vFg" id="IgF-Qx-Srn"/>
                                         </connections>
                                     </mapView>
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="bottom" segmentControlStyle="plain" selectedSegmentIndex="0" id="w1F-GS-BHB">
+                                        <rect key="frame" x="33" y="260" width="254" height="44"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                        <segments>
+                                            <segment title="Normal"/>
+                                            <segment title="Satellite"/>
+                                            <segment title="Hybrid"/>
+                                        </segments>
+                                        <connections>
+                                            <action selector="mapViewTypeClick:" destination="Ns4-0E-vFg" eventType="valueChanged" id="5bH-qd-kiA"/>
+                                        </connections>
+                                    </segmentedControl>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="v4Q-e2-haT">
                                         <rect key="frame" x="20" y="62" width="280" height="100"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -382,6 +420,7 @@
                         <outlet property="contentView" destination="yuH-c9-tUB" id="Psa-nt-TaW"/>
                         <outlet property="listMapControl" destination="CpX-VK-Mf0" id="sUF-7e-qN3"/>
                         <outlet property="mapView" destination="i1z-H9-Q0K" id="hab-0q-E5X"/>
+                        <outlet property="mapViewTypeSelector" destination="w1F-GS-BHB" id="p7U-sy-7zS"/>
                         <outlet property="refreshButton" destination="FyM-LG-fe0" id="Fqh-vK-eHF"/>
                         <outlet property="tableView" destination="v4Q-e2-haT" id="X1d-Ow-x1I"/>
                         <outlet property="toolbar" destination="KXy-na-0ae" id="mx2-C4-gbO"/>
@@ -419,6 +458,7 @@
                 <relationship kind="outlet" name="contentView" candidateClass="UIView"/>
                 <relationship kind="outlet" name="listMapControl" candidateClass="UISegmentedControl"/>
                 <relationship kind="outlet" name="mapView" candidateClass="MKMapView"/>
+                <relationship kind="outlet" name="mapViewTypeSelector" candidateClass="UISegmentedControl"/>
                 <relationship kind="outlet" name="refreshButton" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
                 <relationship kind="outlet" name="toolbar" candidateClass="UIToolbar"/>
