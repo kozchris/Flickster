@@ -47,7 +47,7 @@
             placeAnnotation = [self.annotations objectAtIndex:self.tableView.indexPathForSelectedRow.row];
         }
         
-        photosListMapViewController.place = placeAnnotation.place;
+        photosListMapViewController.placeAnnotation = placeAnnotation;
     }
 }
 

@@ -17,13 +17,15 @@
 @end
 
 @implementation PhotosListMapViewController
-@synthesize place = _place;
+@synthesize placeAnnotation = _placeAnnotation;
 
--(void) setPlace:(NSDictionary *)place
+-(void) setPlace:(FlickrPlaceAnnotation *)placeAnnotation
 {
-    if (_place != place)
+    if (_placeAnnotation != placeAnnotation)
     {
-        _place = place;
+        _placeAnnotation = placeAnnotation;
+        
+        self.title = self.placeAnnotation.title;
         
         if (self.view.window)
         {
@@ -34,7 +36,7 @@
 
 -(NSArray*)getAnnotations
 {
-    NSArray *photos = [FlickrFetcher photosInPlace:self.place maxResults:MAX_PLACE_PHOTO_RESULTS];
+    NSArray *photos = [FlickrFetcher photosInPlace:self.placeAnnotation.place maxResults:MAX_PLACE_PHOTO_RESULTS];
     
     //convert to annotations
     NSMutableArray *annotations = [[NSMutableArray alloc] initWithCapacity:photos.count];
@@ -85,4 +87,9 @@
     }
 }
 
+-(void)viewDidLoad
+{
+    [super viewDidLoad];
+    self.title = self.placeAnnotation.title;
+}
 @end

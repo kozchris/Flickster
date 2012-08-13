@@ -283,11 +283,11 @@
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <prototypes>
-                                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="ListMap Table Cell" textLabel="jWs-e7-TBq" detailTextLabel="gL4-dg-6tP" style="IBUITableViewCellStyleSubtitle" id="ZD0-9v-ZqJ">
+                                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="ListMap Table Cell" textLabel="jWs-e7-TBq" detailTextLabel="gL4-dg-6tP" style="IBUITableViewCellStyleSubtitle" id="ZD0-9v-ZqJ">
                                                 <rect key="frame" x="0.0" y="22" width="280" height="44"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                                    <rect key="frame" x="0.0" y="0.0" width="280" height="43"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="260" height="43"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="jWs-e7-TBq">

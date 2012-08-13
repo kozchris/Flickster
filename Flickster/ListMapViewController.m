@@ -33,6 +33,14 @@ typedef enum enumViewType { kList, kMap } enumViewType;
 @synthesize contentView = _contentView;
 @synthesize annotations = _annotations;
 
+-(void) adjustMapViewToShowAnnotations
+{
+    //set map to view that will encompasis all annotations
+    MKCoordinateRegion region = [self boundingCoordinateRegionForAnnotations];
+    MKCoordinateRegion fitRegion = [self.mapView regionThatFits: region];
+    [self.mapView setRegion: fitRegion animated: YES];
+}
+
 -(void) setAnnotations:(NSArray *)annotations
 {
     if (_annotations!=annotations)
@@ -48,15 +56,9 @@ typedef enum enumViewType { kList, kMap } enumViewType;
         
         [self.mapView addAnnotations:annotations];
         
-        if (self.view.window)
+        if (self.annotations!=nil && self.annotations.count > 0)
         {
-            if (self.annotations!=nil && self.annotations.count > 0)
-            {
-                //set map to view that will encompasis all annotations
-                MKCoordinateRegion region = [self boundingCoordinateRegionForAnnotations];
-                MKCoordinateRegion fitRegion = [self.mapView regionThatFits: region];
-                [self.mapView setRegion: fitRegion animated: YES];
-            }
+            [self adjustMapViewToShowAnnotations];
         }
     }
 }
@@ -106,6 +108,7 @@ typedef enum enumViewType { kList, kMap } enumViewType;
         //reload map data
         self.mapView.frame = self.contentView.bounds;
         [self.contentView bringSubviewToFront:self.mapView];
+        [self adjustMapViewToShowAnnotations];
     }
 }
 
@@ -153,10 +156,22 @@ typedef enum enumViewType { kList, kMap } enumViewType;
     {
         
     }
-    /*for (NSString *key in place.allKeys) {
-     NSLog(@"key: %@ : %@", key, [place objectForKey:key]);
-     }
-     */
+    else if([annotation isKindOfClass:[FlickrPhotoAnnotation class]])
+    {
+        dispatch_queue_t setCellImage = dispatch_queue_create("get table cell image", NULL);
+        dispatch_async(setCellImage, ^{
+            FlickrPhotoAnnotation *photoAnnotation = annotation;
+            UIImage *image = photoAnnotation.thumbnailImage ;
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (!cell.isHidden)
+                {
+                    cell.imageView.image = image;
+                    [cell setNeedsLayout];
+                }
+            });
+        });
+        dispatch_release(setCellImage);
+    }
     
     cell.textLabel.text = annotation.title;
     cell.detailTextLabel.text = annotation.subtitle;
@@ -311,9 +326,21 @@ typedef enum enumViewType { kList, kMap } enumViewType;
         {
             if ([view.annotation isKindOfClass:[FlickrPhotoAnnotation class]])
             {
-                FlickrPhotoAnnotation *annotation = view.annotation;
-                UIImage *image = annotation.thumbnailImage ;
-                imageView.image = image;
+                dispatch_queue_t setCellImage = dispatch_queue_create("get map cell image", NULL);
+                dispatch_async(setCellImage, ^{
+                    FlickrPhotoAnnotation *photoAnnotation = view.annotation;
+                    UIImage *image = photoAnnotation.thumbnailImage ;
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        //resused accessory views, make sure it is still shown and that we are still showing the same annotation
+                        if (imageView.window &&
+                            [view.annotation isKindOfClass:[FlickrPhotoAnnotation class]] &&
+                            ((FlickrPhotoAnnotation*)view.annotation).photoId == photoAnnotation.photoId)
+                        {
+                            imageView.image = image;
+                        }
+                    });
+                });
+                dispatch_release(setCellImage);
             }
         }
     }

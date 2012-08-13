@@ -17,4 +17,5 @@
 //return the thumbnail image cooresponding to this annotation
 @property (nonatomic, strong, readonly) UIImage *thumbnailImage;
 @property (nonatomic, strong) NSDictionary *photo;
+@property (nonatomic, strong, readonly) NSString *photoId;
 @end

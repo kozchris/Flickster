@@ -7,7 +7,8 @@
 //
 
 #import "ListMapViewController.h"
+#import "FlickrPlaceAnnotation.h"
 
 @interface PhotosListMapViewController : ListMapViewController <UITableViewDelegate, UITableViewDataSource, MKMapViewDelegate>
-@property (nonatomic, strong) NSDictionary*place;
+@property (nonatomic, strong) FlickrPlaceAnnotation *placeAnnotation;
 @end

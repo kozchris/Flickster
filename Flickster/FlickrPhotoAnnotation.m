@@ -13,8 +13,9 @@
 @end
 
 @implementation FlickrPhotoAnnotation
-@synthesize photo =_photo;
+@dynamic photo;
 @synthesize thumbnailImage = _thumbnailImage;
+@synthesize photoId = _photoId;
 
 -(NSDictionary*)photo
 {
@@ -24,6 +25,7 @@
 -(void)setPhoto:(NSDictionary*)photo
 {
     super.data = photo;
+    _photoId = [self.photo objectForKey:FLICKR_PHOTO_ID];
 }
 
 -(UIImage*) thumbnailImage
