@@ -124,7 +124,6 @@ typedef enum enumViewType { kList, kMap } enumViewType;
     [defaults synchronize];
 }
 
-
 - (IBAction)mapViewTypeClick:(UISegmentedControl *)sender {
     switch (sender.selectedSegmentIndex)
     {
