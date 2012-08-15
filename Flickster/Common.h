@@ -16,4 +16,6 @@
 
 #define MAX_PLACE_PHOTO_RESULTS 50
 
+#define DEFAULT_VACATION @"My Vacation"
+
 #endif

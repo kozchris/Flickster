@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Photo.h"
 
 @interface PhotoViewController : UIViewController <UISplitViewControllerDelegate, UIPopoverControllerDelegate>
 @property (nonatomic, strong) NSDictionary *photo;
+@property (nonatomic, strong) Photo *itineraryPhoto;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *visitUnVisitClick;
 @end

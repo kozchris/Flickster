@@ -19,12 +19,12 @@
             </objects>
             <point key="canvasLocation" x="-1461" y="-433"/>
         </scene>
-        <!--Navigation Controller - Recents-->
+        <!--Navigation Controller-->
         <scene sceneID="it5-BT-tmu">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="i8K-l8-aUn" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController id="Ztu-Fz-aq9" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Recents" id="pqz-1K-U3B"/>
+                    <tabBarItem key="tabBarItem" systemItem="recents" id="pqz-1K-U3B"/>
                     <toolbarItems/>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackTranslucent"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="BX9-iq-iDa">
@@ -223,12 +223,12 @@
             </objects>
             <point key="canvasLocation" x="-475" y="650"/>
         </scene>
-        <!--Navigation Controller - Top Places-->
+        <!--Navigation Controller-->
         <scene sceneID="V99-IM-aJa">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2Ru-yK-S3d" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController id="SJl-eQ-VKT" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Top Places" id="Oxu-lL-5ie"/>
+                    <tabBarItem key="tabBarItem" systemItem="topRated" id="Oxu-lL-5ie"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="xAH-a5-It9">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="44"/>

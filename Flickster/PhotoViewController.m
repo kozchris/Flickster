@@ -9,21 +9,150 @@
 #import "PhotoViewController.h"
 #import "FlickrFetcher.h"
 #import "Common.h"
+#import "Vacation.h"
+#import "Photo.h"
+#import "Itinerary.h"
+#import "VacationHelper.h"
+#import "Itinerary+create.h"
+#import "Photo+create.h"
+#import "Tag+create.h"
 
 @interface PhotoViewController () <UIScrollViewDelegate>
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *photoTitle;
 @property (weak, nonatomic) IBOutlet UIToolbar *toolbar;
-
+@property (nonatomic, strong) Vacation *vacation;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *visitButton;
+@property (nonatomic, strong) NSString *photoId;
 @end
 
 @implementation PhotoViewController
+@synthesize visitButton = _visitButton;
 @synthesize scrollView = _scrollView;
 @synthesize imageView = _imageView;
 @synthesize photoTitle = _photoTitle;
 @synthesize toolbar = _toolbar;
 @synthesize photo = _photo;
+@synthesize itineraryPhoto = _itineraryPhoto;
+@synthesize visitUnVisitClick = _visitUnVisitClick;
+@synthesize photoId = _photoId;
+
+-(void)setPhotoId:(NSString *)photoId
+{
+    if(![_photoId isEqualToString:photoId])
+    {
+        _photoId = photoId;
+        Photo *photo = [self getVacationPhoto];
+        [self setPhotoForId:self.photoId title:photo.title subTitle:photo.subtitle];
+    }
+}
+
+-(void)setItineraryPhoto:(Photo *)itineraryPhoto
+{
+    if (_itineraryPhoto != itineraryPhoto)
+    {
+        _itineraryPhoto = itineraryPhoto;
+        self.photoId = itineraryPhoto.photoId;
+    }
+}
+
+-(void) setPhoto:(NSDictionary *)photo
+{
+    if(_photo!=photo)
+    {
+        _photo = photo;
+        
+        self.photoId = [self.photo objectForKey:FLICKR_PHOTO_ID];
+        
+        //set title
+        NSString *title = [photo objectForKey:FLICKR_PHOTO_TITLE];
+        title = [title stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+        
+        NSString *description = [photo valueForKeyPath:FLICKR_PHOTO_DESCRIPTION];
+        
+        if (title.length == 0)
+        {
+            title = description;
+            description = @"";
+        }
+        
+        if (title.length==0 && description.length ==0)
+        {
+            title = @"Unknown";
+        }
+        
+        [self setPhotoForId:self.photoId title:title subTitle:description];
+    }
+}
+
+-(Photo*) getVacationPhoto
+{
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Photo"];
+    request.predicate = [NSPredicate predicateWithFormat:@"photoId = %@", self.photoId];
+    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"title" ascending:YES];
+    request.sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
+    
+    NSError *error = nil;
+    NSArray *matches = [self.vacation.managedObjectContext executeFetchRequest:request error:&error];
+    Photo *vacationPhoto;
+    if (matches.count==1)
+    {
+        vacationPhoto = [matches lastObject];
+    }
+    return vacationPhoto;
+}
+
+-(Itinerary *) itineraryForName:(NSString*)name
+{
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Itinerary"];
+    request.predicate = [NSPredicate predicateWithFormat:@"title = %@", name];
+    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"title" ascending:YES];
+    request.sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
+    
+    NSError *error = nil;
+    NSArray *matches = [self.vacation.managedObjectContext executeFetchRequest:request error:&error];
+    Itinerary *itinerary;
+    if (matches.count==1)
+    {
+        itinerary = [matches lastObject];
+    }
+    return itinerary;
+}
+
+-(void) setVisitUnVisitButton
+{
+    //see if photo is in db
+    Photo *vacationPhoto = [self getVacationPhoto];
+    
+    self.visitButton.title = (vacationPhoto!=nil)?@"UnVisit" : @"Visit";
+}
+
+-(void)setVacation:(Vacation *)vacation
+{
+    if(_vacation!=vacation)
+    {
+        _vacation = vacation;
+        [self setVisitUnVisitButton];
+    }
+}
+
+-(void) getCurrentVacation
+{
+    NSString *vacationName = DEFAULT_VACATION;
+    
+    [VacationHelper openVacation:DEFAULT_VACATION usingBlock:^(UIManagedDocument *vacationDocument){
+        NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Vacation"];
+        request.predicate = [NSPredicate predicateWithFormat:@"name = %@", vacationName];
+        NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES];
+        request.sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
+        
+        NSError *error = nil;
+        NSArray *matches = [vacationDocument.managedObjectContext executeFetchRequest:request error:&error];
+        
+        self.vacation = [matches lastObject];
+    }];
+}
 
 -(void) setupScrollView
 {
@@ -43,7 +172,7 @@
 
 -(void) loadImage
 {
-    if (self.imageView == nil || self.photo == nil)
+    if (self.imageView == nil || self.photoId == nil)
     {
         return;
     }
@@ -56,14 +185,13 @@
     
     dispatch_queue_t downloadQueue = dispatch_queue_create("image downloader", NULL);
     dispatch_async(downloadQueue, ^{
-        
         //check for image in cache
         NSFileManager *fileManager = [[NSFileManager alloc] init];
         NSURL *cacheURL = [[fileManager URLsForDirectory:NSCachesDirectory inDomains:NSUserDomainMask ] lastObject];
         
         NSError *error;
         
-        NSString *imageFileName = [@"img_" stringByAppendingString:[self.photo objectForKey:FLICKR_PHOTO_ID]];
+        NSString *imageFileName = [@"img_" stringByAppendingString:self.photoId];
         NSURL *imageURL = [[NSURL alloc] initWithString:imageFileName relativeToURL:cacheURL];
         
         //try to read and check error as described as best practice in documentation instead of using file exists check
@@ -165,75 +293,103 @@
 }
 
 
--(void) setPhoto:(NSDictionary *)photo
+-(void) setPhotoForId:(NSString*)photoId title:(NSString*)title subTitle:(NSString *)subTitle
 {
-    if(_photo!=photo)
+    //set title
+    title = [title stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    
+    self.title = title;
+    self.photoTitle.title = title;
+    
+    //add image to recently viewed list
+    dispatch_queue_t addRecentToDefaults = dispatch_queue_create("add recent to defaults", NULL);
+    dispatch_async(addRecentToDefaults, ^{
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        NSMutableArray *recentlyViewed;
+        NSArray *keyValue = [defaults valueForKey:KEY_RECENT_PHOTOS];
+        if(keyValue==nil)
+        {
+            recentlyViewed = [[NSMutableArray alloc] init];
+        }
+        else
+        {
+            recentlyViewed = [keyValue mutableCopy];
+        }
+        
+        //remove any copies of them image already in list
+        for (int i=recentlyViewed.count-1; i>=0; i--) {
+            /*
+             NSDictionary *test = [recentlyViewed objectAtIndex:i];
+             for (NSString *key in test.allKeys) {
+             NSLog(@"key: %@ : %@", key, [test objectForKey:key]);
+             }*/
+            
+            if ([[[recentlyViewed objectAtIndex:i] objectForKey:FLICKR_PHOTO_ID] isEqualToString: self.photoId])
+            {
+                [recentlyViewed removeObjectAtIndex:i];
+            }
+        }
+        
+        //make our own stripped down photo dictionary to save in recents array
+        NSDictionary *photo = self.photo;
+        
+        //check photoId to see if we were created from itinerary photo, if so then create photo dictionary
+        if (photoId == self.itineraryPhoto.photoId)
+        {
+            photo = [self.itineraryPhoto FlickrPhotoFromPhoto];
+        }
+            
+        [recentlyViewed insertObject:photo atIndex:0];
+        
+        if(recentlyViewed.count>MAX_RECENT_PHOTOS)
+        {
+            [recentlyViewed removeLastObject];
+        }
+        
+        [defaults setValue:recentlyViewed forKey:KEY_RECENT_PHOTOS];
+        [defaults synchronize];
+    });
+    dispatch_release(addRecentToDefaults);
+    
+    //draw image
+    [self loadImage];
+}
+
+- (IBAction)visitUnVisitClick:(UIBarButtonItem *)sender {
+    //see if photo is in db
+    Photo *vacationPhoto = [self getVacationPhoto];
+    
+    if(vacationPhoto)
     {
-        _photo = photo;
-        
-        //set title
-        NSString *title = [photo objectForKey:FLICKR_PHOTO_TITLE];
-        title = [title stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-        
-        NSString *description = [photo valueForKeyPath:FLICKR_PHOTO_DESCRIPTION];
-        
-        if (title.length == 0)
-        {
-            title = description;
-            description = @"";
+        //decrement any tag counts, and remove photo reference
+        NSSet *tags = vacationPhoto.tags;
+        for (Tag *tag in tags) {
+            tag.count = [[NSNumber alloc] initWithInt:[tag.count intValue]-1];
         }
         
-        if (title.length==0 && description.length ==0)
+        //decrement photo count
+        vacationPhoto.itinerary.count = [[NSNumber alloc] initWithInt:[vacationPhoto.itinerary.count intValue]+1];
+        //remove photo from itinerary
+        [vacationPhoto.itinerary removePhotosObject:vacationPhoto];
+        
+        sender.title = @"Visit";
+    }
+    else
+    {
+        //add photo to itinerary
+        NSString *placeName = [self.photo valueForKey:FLICKR_PHOTO_PLACE_NAME];
+        Itinerary *itinerary = [self itineraryForName:placeName];
+        if (itinerary==nil)
         {
-            title = @"Unknown";
+            //add new itineary
+            itinerary = [Itinerary itineraryWithTitle:placeName inManagedObjectContext:self.vacation.managedObjectContext];
+            [self.vacation addItinerariesObject:itinerary];
         }
         
-        self.title = title;
-        self.photoTitle.title = title;
+        //add photo (adds tags also)
+        vacationPhoto = [Photo photoInItinerary:itinerary fromPhotoDictionary:self.photo];
         
-        //add image to recently viewed list
-        dispatch_queue_t addRecentToDefaults = dispatch_queue_create("add recent to defaults", NULL);
-        dispatch_async(addRecentToDefaults, ^{
-            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-            NSMutableArray *recentlyViewed;
-            NSArray *keyValue = [defaults valueForKey:KEY_RECENT_PHOTOS];
-            if(keyValue==nil)
-            {
-                recentlyViewed = [[NSMutableArray alloc] init];
-            }
-            else
-            {
-                recentlyViewed = [keyValue mutableCopy];
-            }
-            
-            //remove any copies of them image already in list
-            for (int i=recentlyViewed.count-1; i>=0; i--) {
-                /*
-                 NSDictionary *test = [recentlyViewed objectAtIndex:i];
-                 for (NSString *key in test.allKeys) {
-                 NSLog(@"key: %@ : %@", key, [test objectForKey:key]);
-                 }*/
-                
-                if ([[recentlyViewed objectAtIndex:i] objectForKey:FLICKR_PHOTO_ID] == [photo objectForKey:FLICKR_PHOTO_ID])
-                {
-                    [recentlyViewed removeObjectAtIndex:i];
-                }
-            }
-            
-            [recentlyViewed insertObject:photo atIndex:0];
-            
-            if(recentlyViewed.count>MAX_RECENT_PHOTOS)
-            {
-                [recentlyViewed removeLastObject];
-            }
-            
-            [defaults setValue:recentlyViewed forKey:KEY_RECENT_PHOTOS];
-            [defaults synchronize];
-        });
-        dispatch_release(addRecentToDefaults);
-        
-        //draw image
-        [self loadImage];
+        sender.title = @"UnVisit";
     }
 }
 
@@ -256,6 +412,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [self getCurrentVacation];
 }
 
 -(UIView*) viewForZoomingInScrollView:(UIScrollView *)scrollView
@@ -290,6 +448,8 @@
     [self setImageView:nil];
     [self setPhotoTitle:nil];
     [self setToolbar:nil];
+    [self setVisitUnVisitClick:nil];
+    [self setVisitButton:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
